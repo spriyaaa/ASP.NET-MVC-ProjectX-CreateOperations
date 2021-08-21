@@ -1,4 +1,6 @@
 ﻿using ProjectXBL;
+using ProjectXDTO;
+using ProjectXWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +35,39 @@ namespace ProjectXWebApp.Controllers
                 });
             }
             return View(lstCourseObj);
+        }
+
+
+
+
+        [HttpGet]
+        public ActionResult AddNewCourse()
+        {
+            return View();
+        }
+
+
+
+        [HttpPost]
+        public ActionResult AddNewCourse(CourseView obj)
+        {
+            courseBLObj = new CourseBL();
+            CourseDTO newCourseDTOObj = new CourseDTO()
+            {
+                CourseID = obj.CourseID,
+                CourseTitle = obj.CourseTitle,
+                NoOfHours = obj.NoOfHours,
+                CourseOwner_ID = obj.CourseOwner_ID
+            };
+            var res = courseBLObj.AddNewCourse(newCourseDTOObj);
+            if (res == 1)
+            {
+                return RedirectToAction("GetAllCourses");
+            }
+            else
+            {
+                return View("Error");
+            }
         }
     }
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ProjectXBL;
+using ProjectXDTO;
+using ProjectXWebApp.Models;
 
 namespace ProjectXWebApp.Controllers
 {
@@ -16,7 +18,7 @@ namespace ProjectXWebApp.Controllers
             return View();
         }
 
-
+        
         public ActionResult GetAllBatches()
         {
             batchBLObj = new BatchBL();
@@ -39,6 +41,40 @@ namespace ProjectXWebApp.Controllers
         }
 
 
-        
+
+
+        [HttpGet]
+        public ActionResult AddNewBatch()
+        {
+            return View();
+        }
+
+
+
+        [HttpPost]
+        public ActionResult AddNewBatch(BatchView obj)
+        {
+            batchBLObj = new BatchBL();
+            BatchDTO batchDTOObj = new BatchDTO()
+            {
+                BatchId =obj.BatchId,
+                BatchName =obj.BatchName,
+                Batch =obj.Batch,
+                NoOfStudent =obj.NoOfStudent,
+                SessionQuarter =obj.SessionQuarter
+            };
+            var res = batchBLObj.AddNewBatch(batchDTOObj);
+            if (res == 1)
+            {
+                return RedirectToAction("GetAllBatches");
+            }
+            else
+            {
+                return View("Error");
+            }
+        }
+
+
+
     }
 }

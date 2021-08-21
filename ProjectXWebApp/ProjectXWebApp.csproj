@@ -181,6 +181,8 @@
     <Content Include="Views\Faculty\GetAllFaculties.cshtml" />
     <Content Include="Views\Shared\_ModelLayout.cshtml" />
     <Content Include="Views\Model\GetAllModels.cshtml" />
+    <Content Include="Views\Course\AddCourse.cshtml" />
+    <Content Include="Views\Faculty\AddFaculty.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

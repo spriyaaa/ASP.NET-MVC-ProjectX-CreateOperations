@@ -1,4 +1,6 @@
 ﻿using ProjectXBL;
+using ProjectXDTO;
+using ProjectXWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,5 +34,38 @@ namespace ProjectXWebApp.Controllers
             }
             return View(lstModelObj);
         }
+
+
+     
+     
+        [HttpGet]
+        public ActionResult AddNewModel()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddNewModel(ModelView obj)
+        {
+            modelBLObj = new ModelBL();
+            ModelDTO modelDTOObj =new ModelDTO()
+            {
+                ModelId=obj.ModelId,
+                ModelName=obj.ModelName
+
+            };
+
+            var result = modelBLObj.AddNewModel(modelDTOObj);
+            if (result == 1)
+            {
+                return RedirectToAction("GetModel");
+            }
+            else
+            {
+                return View("Error");
+            }
+
+        }
+
     }
 }

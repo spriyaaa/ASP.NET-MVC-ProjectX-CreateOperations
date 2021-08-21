@@ -1,4 +1,6 @@
 ﻿using ProjectXBL;
+using ProjectXDTO;
+using ProjectXWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +38,44 @@ namespace ProjectXWebApp.Controllers
 
             }
             return View(resultDTO);
+        }
+
+
+
+
+        [HttpGet]
+        public ActionResult AddNewGrader()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult AddNewGrader(GraderView obj)
+        {
+            graderBLObj = new GraderBL();
+            GraderDTO graderDTOObj = new GraderDTO()
+            {
+                FacultyId = obj.FacultyId,
+                CourseId = obj.CourseId,
+                ParticipantId = obj.ParticipantId,
+                TotalMarks = obj.TotalMarks,
+                AreaOfImprovement = obj.AreaOfImprovement,
+                AreaOfExcellence = obj.AreaOfExcellence
+
+            };
+            var result = graderBLObj.AddNewGrader(graderDTOObj);
+            if(result==1)
+            {
+                return RedirectToAction("GetAllGrader");
+            }
+
+
+            else
+            {
+                return View("Error");
+            }
+
         }
     }
     

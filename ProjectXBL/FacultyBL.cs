@@ -31,11 +31,11 @@ namespace ProjectXBL
             }
         }
 
-        public int AddNewFaculty(FacultyDTO newFacDetails)
+        public int AddNewFaculty(FacultyDTO facDTOObj)
         {
             try
             {
-                int returnvalue = objFaculty.AddNewFaculty(newFacDetails);
+                int returnvalue = objFaculty.AddNewFaculty(facDTOObj);
                 return returnvalue;
             }
             catch (Exception ex)

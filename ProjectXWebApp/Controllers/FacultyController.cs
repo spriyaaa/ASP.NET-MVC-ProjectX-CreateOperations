@@ -1,4 +1,6 @@
 ﻿using ProjectXBL;
+using ProjectXDTO;
+using ProjectXWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +34,37 @@ namespace ProjectXWebApp.Controllers
                 });
             }
             return View(lstFacultyObj);
+        }
+
+
+
+
+        [HttpGet]
+        public ActionResult AddNewFaculty()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult AddNewFaculty(FacultyView obj)
+        {
+            facultyBLObj = new FacultyBL();
+            FacultyDTO facDTOObj = new FacultyDTO()
+            {
+                FacultyID = obj.FacultyID,
+                EmailId = obj.EmailId,
+                Name = obj.Name,
+            };
+            var res = facultyBLObj.AddNewFaculty(facDTOObj);
+            if (res == 1)
+            {
+                return RedirectToAction("GetFaculties");
+            }
+            else
+            {
+                return View("Error");
+            }
         }
     }
 }
